@@ -1,0 +1,56 @@
+---
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import type { Match } from "../interfaces/AfaMatchesResponse.types";
+interface Props extends Match {}
+
+const { EquipoLoc, EquipoVis, Fecha, Inicio, tiempoEvento, campeonato } =
+  Astro.props;
+//   "label": "Temporada Regular",
+//         "fecha": "2025-03-25",
+//         "hora": "21:00:00",
+//         "gmt": "-05:00"
+const date = new Date(`${Fecha.fecha}T${Fecha.hora}`);
+const dateString = format(date, "PPPP',' HH:mm", { locale: es });
+---
+
+<article
+  class="flex flex-col gap-8 p-4 antialiased antialiased-subpixel-antialiased w-full"
+  itemscope
+  itemtype="http://schema.org/SportsEvent"
+>
+  <meta itemprop="startDate" content={Inicio.fecha} />
+  <meta itemprop="superEvent" content={campeonato.long_name} />
+  <h5 class="text-white text-xs font-light text-center tracking-widest">
+    {campeonato.long_name}
+    <br />
+    <span class="text-white text-base font-medium text-center">
+      {Fecha.label}
+    </span>
+  </h5>
+
+  <div class="grid grid-cols-[1fr_auto_1fr]  text-white">
+    <div class="flex items-center justify-center gap-1">
+      <h3 class="text-lg  uppercase">{EquipoLoc.sigla}</h3>
+      <img
+        src={EquipoLoc.logo}
+        alt={EquipoLoc.nombre}
+        class="w-10 h-10 rounded-full"
+      />
+    </div>
+    <div class="flex flex-col items-center justify-center w-full">
+      <span class="text-lg ">VS</span>
+    </div>
+    <div class="flex items-center justify-center gap-1">
+      <img
+        src={EquipoVis.logo}
+        alt={EquipoVis.nombre}
+        class="w-10 h-10 rounded-full"
+      />
+      <h3 class="text-lg uppercase">{EquipoVis.sigla}</h3>
+    </div>
+  </div>
+  <div class=" flex justify-center items-center text-white text-xs ">
+    <span class="text-sm text-nowrap tracking-wide first-letter:uppercase">{dateString}</span>
+  </div>
+</article>

@@ -1,0 +1,141 @@
+---
+import MatchCard from "./MatchCard.astro";
+import type { AfaMatches } from "../interfaces/AfaMatchesResponse.types";
+import arrowLeft from "../assets/arrow-left.svg";
+
+const response = await fetch(
+  "https://assets1.afa.com.ar/.statics/json/SliderPublic.json"
+);
+const data: AfaMatches = await response.json();
+console.log(data);
+---
+
+<!-- <div
+  class="bg-primary-850 h-full rounded-sm grid grid-cols-3 py-8 [&>article]:border-r-2 [&>article]:border-white [&>article]:last:border-r-0"
+>
+  {data.Partidos.slice(0, 3).map((match) => <MatchCard {...match} />)}
+</div> -->
+<div class="swiper w-full bg-primary-850 rounded-sm">
+  <!-- Wrapper adicional requerido -->
+  <div class="swiper-wrapper">
+    <!-- Los slides -->
+    {
+      data.Partidos.map((match) => (
+        <div class="swiper-slide">
+          <MatchCard {...match} />
+        </div>
+      ))
+    }
+  </div>
+  <!-- Botones de navegación -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+<script>
+  // Core de Swiper y estilos
+  import Swiper from "swiper";
+  import "swiper/css";
+  // Módulo Navigation de Swiper y estilos
+  import { Navigation, Autoplay } from "swiper/modules";
+  import "swiper/css/navigation";
+
+  // Configurar Swiper
+  const swiper = new Swiper(".swiper", {
+    modules: [Navigation, Autoplay], // definir los módulos a usar
+    loop: true, // definir si los slides estarán en bucle
+    // agregar número de slides para la pantalla
+ 
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 1,
+      },
+      1024: {
+        slidesPerView: 3,
+      
+      },
+      1280: {
+        slidesPerView: 4,
+      },
+    },
+
+    navigation: {
+      // definir botones next y prev para el módulo Navigation
+      prevEl: ".swiper-button-prev",
+      nextEl: ".swiper-button-next",
+    },
+  });
+</script>
+<style>
+  .swiper-slide {
+    padding: 20px 0;
+    position: relative;
+  }
+
+  .swiper-slide::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 40px;
+    bottom: 40px;
+    width: 1px;
+    background-color: #fff;
+  }
+
+  @media (min-width: 1024px) {
+    .swiper-slide:nth-child(3n)::after {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .swiper-slide:nth-child(4n)::after {
+      display: none;
+    }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    inline-size: 40px !important;
+    block-size: 40px !important;
+    border-radius: 50%;
+  }
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+  }
+
+  .swiper-button-next::after {
+    content: " ";
+
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    background-image: url("/icons/arrow-right.svg") !important;
+    background-size: 20px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    background-size: 20px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    content: " ";
+  }
+  .swiper-button-prev:after {
+    background-image: url("/icons/arrow-left.svg") !important;
+  }
+</style>

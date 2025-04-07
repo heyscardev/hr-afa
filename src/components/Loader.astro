@@ -6,6 +6,7 @@
   }
 
   .loader-wrapper {
+    display: none;
     position: fixed;
     inset: 0;
     background-image: url("/images/bandera-bg.webp"),
@@ -19,6 +20,9 @@
     flex-direction: column;
     z-index: 9999;
     transition: opacity 0.5s ease;
+  }
+  body.is-loading .loader-wrapper {
+    display: flex;
   }
   .hide-wrapper {
    opacity: 0;
