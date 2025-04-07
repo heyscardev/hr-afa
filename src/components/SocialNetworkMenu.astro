@@ -1,10 +1,6 @@
 ---
 import SocialNetworkBtn from "./SocialNetworkBtn.astro";
-import XLogo from "../assets/social-networks/XLogo.svg";
-import instagram from "../assets/social-networks/InstagramLogo.svg";
-import youtube from "../assets/social-networks/YoutubeLogo.svg";
-import facebook from "../assets/social-networks/FacebookLogo.svg";
-import tiktok from "../assets/social-networks/TikTokLogo.svg";
+
 ---
 
 <style>
@@ -16,25 +12,25 @@ import tiktok from "../assets/social-networks/TikTokLogo.svg";
 </style>
 
 <div class="social-network-menu flex flex-col gap-y-4 items-center justify-end mb-8 mx-4">
-  <SocialNetworkBtn href="https://x.com/afa" icon={XLogo.src} label="X" />
+  <SocialNetworkBtn href="https://x.com/afa" icon={"/icons/social-networks/XLogo.svg"} label="X" />
   <SocialNetworkBtn
     href="https://www.youtube.com/@AFAOFICIAL"
-    icon={instagram.src}
+    icon={"/icons/social-networks/InstagramLogo.svg"}
     label="Instagram"
   />
   <SocialNetworkBtn
     href="https://www.youtube.com/@AFAOficial"
-    icon={youtube.src}
+    icon={"/icons/social-networks/YoutubeLogo.svg"}
     label="Youtube"
   />
   <SocialNetworkBtn
     href="https://www.facebook.com/AFAOFICIAL/"
-    icon={facebook.src}
+    icon={"/icons/social-networks/FacebookLogo.svg"}
     label="Facebook"
   />
   <SocialNetworkBtn
     href="https://www.tiktok.com/@afaseleccion"
-    icon={tiktok.src}
+    icon={"/icons/social-networks/TikTokLogo.svg"}
     label="TikTok"
   />
 </div>
