@@ -1,0 +1,67 @@
+<style>
+  .nav-bar-list {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+  .nav-bar-list a {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      text-decoration: underline;
+      color: var(--color-primary-700);
+      transition: all 0.3s ease;
+    }
+    &:active {
+      text-decoration: underline;
+      color: var(--color-primary-500);
+      transition: all 0.3s ease;
+    }
+    &:visited {
+      text-decoration: underline;
+
+      transition: all 0.3s ease;
+    }
+  }
+  .logo-container {
+    transform: translateX(-100px);
+    animation: translateAndFadeLeft 0.4s ease-in-out forwards 1s;
+  }
+</style>
+
+<nav class="w-fit flex items-center">
+  <div class="w-26 h-26 flex items-center justify-center logo-container">
+    <img src="/favicon.svg" alt="AFA - logo dorado" />
+  </div>
+
+  <ul class="nav-bar-list flex items-center gap-6 text-white max-md:hidden">
+    <li><a href="/institucional">Institucional</a></li>
+    <li><a href="/noticias">Noticias</a></li>
+    <li><a href="/estadisticas">Estadísticas</a></li>
+    <li><a href="/desarrollo">Desarrollo</a></li>
+    <li><a href="/documentos">Documentos</a></li>
+  </ul>
+  <div class="h-8 mx-6 separator"></div>
+  <div class="search-bar">
+    <svg
+      width="24"
+      height="25"
+      viewBox="0 0 24 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11 19.5C15.4183 19.5 19 15.9183 19 11.5C19 7.08172 15.4183 3.5 11 3.5C6.58172 3.5 3 7.08172 3 11.5C3 15.9183 6.58172 19.5 11 19.5Z"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path
+        d="M21.0004 21.5004L16.6504 17.1504"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </div>
+</nav>

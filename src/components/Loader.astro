@@ -18,6 +18,11 @@
     justify-content: center;
     flex-direction: column;
     z-index: 9999;
+    transition: opacity 0.5s ease;
+  }
+  .hide-wrapper {
+   opacity: 0;
+    pointer-events: none;
   }
   .loader-content {
     display: grid;
@@ -202,15 +207,19 @@
     ]);
   };
 
-  const showNext = () => {
-    if (index >= cups.length -5) {
+  const showNext = async () => {
+    if (index >= cups.length - 5) {
       // loader.style.opacity = 0;
       cupImg.classList.add("hide");
       cupYear.classList.add("hide");
       cupTitle.classList.add("hide");
       cupSubtitle.classList.add("hide");
       //  setTimeout(() => loader.remove(), 500);
-      return;
+      if (index >= cups.length) {
+        loader.classList.add("hide-wrapper");
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        document.body.classList.remove("is-loading");
+      }
     }
 
     const cup = cups[index];
@@ -222,7 +231,7 @@
     cupSubtitle.textContent = cup.subtitle ?? "";
 
     index++;
-   setTimeout(showNext, 100);
+    setTimeout(showNext, 100);
   };
 
   document.addEventListener("DOMContentLoaded", async () => {

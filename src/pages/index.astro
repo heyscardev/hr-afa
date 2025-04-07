@@ -1,13 +1,164 @@
 ---
-import Loader from '../components/Loader.astro';
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
+import MainNavbar from "../components/MainNavbar.astro";
+import Layout from "../layouts/Layout.astro";
+import afaTeam from "../assets/afa-team.webp";
+import logoOlimpiadas from "../assets/logo-olimpiadas.svg";
+import lines from "../assets/dashboard-lines.svg";
+import stars from "../assets/stars.webp";
+import brands from "../assets/brands.webp";
+import SocialNetworkMenu from "../components/SocialNetworkMenu.astro";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
+<style>
+  @keyframes showSideImageContainer {
+    from {
+      transform: translate(75%, -75%);
+    }
+    to {
+      transform: translate(0, 0);
+    }
+  }
+  
+  .side-image-container .lines-img {
+    transform: translate(75%, -75%);
+    animation: showSideImageContainer 0.2s ease-in-out forwards;
+  }
+  .side-image-container .afa-team-img {
+    transform: translate(75%, -75%);
+    animation: showSideImageContainer 0.4s ease-in-out forwards;
+  }
+  .side-image-container.show .lines-img {
+    transform: translate(0, 0);
+  }
+  .side-image-container.show .afa-team-img {
+    transform: translate(0, 0);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .main-text {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards 0.3s;
+  }
+
+  @keyframes translateInShort {
+    from {
+      transform: translateY(100px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  .text-subtitle {
+    transform: translateY(100px);
+    animation: translateInShort 0.4s ease-in-out forwards 0.1s;
+  }
+  @keyframes translateAnimation {
+    from {
+      transform: translateY(calc(50vh - 200px));
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  .text-title {
+    transform: translateY(calc(50vh - 200px));
+    animation: translateAnimation 0.4s ease-in-out forwards 0.1s;
+  }
+  @keyframes translateBrands {
+    0% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    25% {
+      opacity: 1;
+      transform: translateY(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .text-brands {
+    transform: translateY(calc(50vh - 200px));
+    animation: translateAnimation 0.4s ease-in-out forwards 0.5s;
+  }
+  .stars-img {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in-out forwards 0.5s;
+  }
+</style>
+
 <Layout>
-	<Loader />
-	<!-- <Welcome /> -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+    <MainNavbar />
+  </header>
+  <main class="w-full h-screen flex flex-col">
+    <div class="flex flex-1 relative overflow-x-hidden side-image-container">
+      <div class="absolute top-0 lines-img right-0 bottom-0">
+        <img src={lines.src} alt="lines" class="w-full h-full" />
+      </div>
+      <div class="absolute top-0 afa-team-img right-0 bottom-8">
+        <img src={afaTeam.src} alt="afa-team" class="w-auto h-full" />
+      </div>
+
+      <SocialNetworkMenu />
+      <div
+        class="main-text mt-18 flex flex-col gap-y-6 items-center justify-center sm:w-1/2"
+      >
+        <img
+          src={stars.src}
+          alt="Logo Olimpiadas 2024"
+          class="w-30 stars-img"
+        />
+        <h2
+          class="text-center text-primary-foreground text-lg tracking-[6px] font-extralight uppercase text-subtitle"
+        >
+          Bienvenido al sitio del
+        </h2>
+        <h1
+          class="text-center text-primary-foreground text-7xl font-bold tracking-[20px] uppercase text-title"
+        >
+          Campeón <br />del Mundo
+        </h1>
+        <div class="flex items-center gap-x-4 text-brands">
+          <img src={brands.src} alt="afa - brands" class="w-60" />
+        </div>
+      </div>
+    </div>
+
+    <section
+      class="p-6 px-10 bg-primary-900 grid grid-cols-[auto_1fr] gap-x-10"
+    >
+      <div class="col-span-1">
+        <img src={logoOlimpiadas.src} alt="Logo Olimpiadas 2024" class="w-30" />
+      </div>
+      <div class="bg-primary-850 h-full rounded-sm"></div>
+    </section>
+  </main>
 </Layout>
+
+<script>
+  const sideImageContainer = document.querySelector(".side-image-container");
+  const linesImg = document.querySelector(".lines-img");
+  const afaTeamImg = document.querySelector(".afa-team-img");
+
+  document.addEventListener("DOMContentLoaded", () => {
+    sideImageContainer?.classList.add("show");
+  });
+  // linesImg?.addEventListener("click", () => {
+  //   sideImageContainer?.classList.toggle("show");
+  // });
+
+  // afaTeamImg?.addEventListener("click", () => {
+  //   sideImageContainer?.classList.toggle("show");
+  // });
+</script>
