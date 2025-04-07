@@ -97,6 +97,10 @@ import MatchSlider from "../components/MatchSlider.astro";
     opacity: 0;
     animation: fadeIn 0.4s ease-in-out forwards 0.5s;
   }
+  .footer {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards 0.5s;
+  }
 </style>
 
 <Layout>
@@ -137,7 +141,7 @@ import MatchSlider from "../components/MatchSlider.astro";
       </div>
     </div>
 
-    <section class="p-6 px-10 bg-primary-900 grid grid-cols-12 gap-x-10 w-full">
+    <section class="p-6 px-10 bg-primary-900 grid grid-cols-12 gap-x-10 w-full h-72 items-center footer">
       <div class="col-span-1 flex items-center justify-center">
         <img src={logoOlimpiadas.src} alt="Logo Olimpiadas 2024" class="w-30" />
       </div>
