@@ -246,13 +246,13 @@
     cupSubtitle.textContent = cup.subtitle ?? "";
 
     index++;
-    setTimeout(showNext, 80);
+    setTimeout(showNext, 10);
   };
 
   document.addEventListener("DOMContentLoaded", async () => {
-    console.time("preloadImages");
+
     await preloadImages();
-    console.timeEnd("preloadImages");
+
     showNext();
   });
 </script>
