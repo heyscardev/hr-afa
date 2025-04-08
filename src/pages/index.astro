@@ -107,45 +107,50 @@ import MatchSlider from "../components/MatchSlider.astro";
   <header class="fixed top-0 left-0 right-0 z-50 bg-transparent">
     <MainNavbar />
   </header>
-  <main class="w-full h-screen flex flex-col">
-    <div class="flex flex-1 relative overflow-x-hidden side-image-container">
-      <div class="absolute top-0 lines-img right-0 bottom-0">
-        <img src={lines.src} alt="lines" class="w-full h-full" />
-      </div>
-      <div class="absolute top-0 afa-team-img right-0 bottom-8">
-        <img src={afaTeam.src} alt="afa-team" class="w-auto h-full" />
-      </div>
-
-      <SocialNetworkMenu />
-      <div
-        class="main-text mt-18 flex flex-col gap-y-6 items-center justify-center sm:w-1/2"
-      >
-        <img
-          src={stars.src}
-          alt="Logo Olimpiadas 2024"
-          class="w-30 stars-img"
-        />
-        <h2
-          class="text-center text-primary-foreground text-lg tracking-[6px] font-extralight uppercase text-subtitle"
+  <main class="w-full min-h-screen flex flex-col ">
+    <div class="flex flex-1 flex-wrap max-lg:flex-col-reverse relative overflow-x-hidden side-image-container overflow-hidden">
+      <div class="w-full lg:w-[60%]  lg:flex-1  flex max-lg:flex-col-reverse">
+        <SocialNetworkMenu />
+        <div
+          class="main-text mt-18 flex flex-col gap-y-6 items-center justify-center flex-1 "
         >
-          Bienvenido al sitio del
-        </h2>
-        <h1
-          class="text-center text-primary-foreground text-7xl font-bold tracking-[20px] uppercase text-title"
-        >
-          Campeón <br />del Mundo
-        </h1>
-        <div class="flex items-center gap-x-4 text-brands">
-          <img src={brands.src} alt="afa - brands" class="w-60" />
+          <img
+            src={stars.src}
+            alt="Logo Olimpiadas 2024"
+            class="w-30 stars-img"
+          />
+          <h2
+            class="text-center text-primary-foreground text-lg tracking-[6px] font-extralight uppercase text-subtitle"
+          >
+            Bienvenido al sitio del
+          </h2>
+          <h1
+            class="text-center text-primary-foreground text-4xl md:text-7xl font-bold tracking-[20px] uppercase text-title"
+          >
+            Campeón <br />del Mundo
+          </h1>
+          <div class="flex items-center gap-x-4 text-brands">
+            <img src={brands.src} alt="afa - brands" class="w-60" />
+          </div>
+        </div>
+      </div>
+      <div class=" w-full lg:flex-1  max-lg:h-[500px] relative overflow-hidden ">
+        <div class="absolute top-0 lines-img right-0 bottom-0 ">
+          <img src={lines.src} alt="lines" class="w-full h-full" />
+        </div>
+        <div class="absolute top-0 afa-team-img right-0 bottom-8">
+          <img src={afaTeam.src} alt="afa-team" class="w-auto h-full" />
         </div>
       </div>
     </div>
 
-    <section class="p-6 px-10 bg-primary-900 grid grid-cols-12 gap-x-10 w-full h-72 items-center footer">
-      <div class="col-span-1 flex items-center justify-center">
+    <section
+      class="py-6 md:px-10 bg-primary-900 grid grid-cols-12 gap-10 w-full min-h-72 items-center footer"
+    >
+      <div class="col-span-full lg:col-span-1 flex items-center justify-center">
         <img src={logoOlimpiadas.src} alt="Logo Olimpiadas 2024" class="w-30" />
       </div>
-      <div class="col-span-11">
+      <div class="col-span-full lg:col-span-11 px-5">
         <MatchSlider />
       </div>
     </section>
