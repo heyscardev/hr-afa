@@ -37,23 +37,27 @@ console.log(data);
   import Swiper from "swiper";
   import "swiper/css";
   // Módulo Navigation de Swiper y estilos
-  import { Navigation, Autoplay } from "swiper/modules";
+  import { Navigation, Autoplay, } from "swiper/modules";
   import "swiper/css/navigation";
 
   // Configurar Swiper
   const swiper = new Swiper(".swiper", {
     modules: [Navigation, Autoplay], // definir los módulos a usar
-    loop: true, // definir si los slides estarán en bucle
+    loop: false, // definir si los slides estarán en bucle
     // agregar número de slides para la pantalla
  
     autoplay: {
-      delay: 5000,
+      delay: 2000,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
     },
+    spaceBetween: 10,
     breakpoints: {
-      768: {
+      320: {
         slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
       },
       1024: {
         slidesPerView: 3,
@@ -61,6 +65,7 @@ console.log(data);
       },
       1280: {
         slidesPerView: 4,
+      
       },
     },
 
@@ -80,24 +85,19 @@ console.log(data);
   .swiper-slide::after {
     content: '';
     position: absolute;
-    right: 0;
-    top: 40px;
-    bottom: 40px;
+    right: -3px;
+    top: 30px;
+    bottom: 30px;
     width: 1px;
     background-color: #fff;
   }
 
-  @media (min-width: 1024px) {
-    .swiper-slide:nth-child(3n)::after {
-      display: none;
-    }
+@media (max-width: 767px) {
+  .swiper-slide::after {
+    display: none;
   }
+} 
 
-  @media (min-width: 1280px) {
-    .swiper-slide:nth-child(4n)::after {
-      display: none;
-    }
-  }
 
   .swiper-button-prev,
   .swiper-button-next {

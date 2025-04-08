@@ -5,13 +5,13 @@ import SocialNetworkBtn from "./SocialNetworkBtn.astro";
 
 <style>
   .social-network-menu {
-    transform: translateX(-100px);
+    transform: translateX(-100vw);
     animation: translateAndFadeLeft 0.4s ease-in-out forwards 1s;
   }
  
 </style>
 
-<div class="social-network-menu flex flex-col gap-y-4 items-center justify-end mb-8 mx-4">
+<div class="social-network-menu flex lg:flex-col gap-4 items-center justify-center lg:justify-end mb-8 lg:mx-4">
   <SocialNetworkBtn href="https://x.com/afa" icon={"/icons/social-networks/XLogo.svg"} label="X" />
   <SocialNetworkBtn
     href="https://www.youtube.com/@AFAOFICIAL"

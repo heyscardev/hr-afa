@@ -1,10 +1,18 @@
 <style>
-  @font-face {
+  /* @font-face {
     font-family: "AFAFont";
     src: url("/fonts/MSGOTHIC.TTF") format("truetype");
     font-display: swap;
-  }
+  } */
 
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .loader-wrapper {
     display: none;
     position: fixed;
@@ -20,6 +28,7 @@
     flex-direction: column;
     z-index: 9999;
     transition: opacity 0.5s ease;
+    animation: fadeIn 0.5s ease-in-out;
   }
   body.is-loading .loader-wrapper {
     display: flex;
@@ -34,6 +43,7 @@
     height: 600px;
     justify-items: center;
     align-items: end;
+    
   }
   .cup-img {
     width: auto;
@@ -55,7 +65,8 @@
     font-size: 14rem;
     color: #fff;
     letter-spacing: 0.1em;
-    font-family: "AFAFont", sans-serif;
+    font-weight: 600;
+    font-family: sans-serif,monospace;
     transition: translate 1s ease;
   }
   .year.hide {
@@ -235,13 +246,13 @@
     cupSubtitle.textContent = cup.subtitle ?? "";
 
     index++;
-    setTimeout(showNext, 100);
+    setTimeout(showNext, 10);
   };
 
   document.addEventListener("DOMContentLoaded", async () => {
-    console.time("preloadImages");
+
     await preloadImages();
-    console.timeEnd("preloadImages");
+
     showNext();
   });
 </script>
