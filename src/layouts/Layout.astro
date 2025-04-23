@@ -1,22 +1,72 @@
 ---
-import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 import Loader from "../components/Loader.astro";
+
+// Habilitar transiciones de vista a nivel de sitio
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" transition:animate="slide">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>AFA - ARGENTINA</title>
-    <ClientRouter />
+    <meta name="view-transition" content="same-origin" />
+    <script is:inline>
+      // Script para controlar las transiciones
+      document.addEventListener('DOMContentLoaded', () => {
+        // Inicialización del control de transiciones
+        initTransitions();
+      });
+
+      function initTransitions() {
+        // Añadir listener a todos los enlaces
+        document.querySelectorAll('a[href]:not([target="_blank"])').forEach(link => {
+          link.addEventListener('click', handleLinkClick);
+        });
+
+        // También manejar cambios en la historia del navegador
+        window.addEventListener('popstate', handlePopState);
+      }
+
+      function handleLinkClick(e) {
+        // Solo procesar enlaces internos
+        const href = e.currentTarget.getAttribute('href');
+        if (!href || href.startsWith('http') || href.startsWith('//') || href.startsWith('#')) {
+          return; // No procesar enlaces externos o anclas
+        }
+        
+        // Prevenir navegación por defecto
+        e.preventDefault();
+        
+        // Aplicar clases para animaciones de salida
+        document.documentElement.classList.add('navigating-away');
+        
+        // Tiempo suficiente para completar todas las animaciones
+        setTimeout(() => {
+          window.location.href = href;
+        }, 1000);
+      }
+
+      function handlePopState() {
+        // Manejar navegación con botones del navegador
+        const teamImg = document.querySelector('.afa-team-img');
+        if (teamImg) {
+          teamImg.classList.add('exit-animation');
+        }
+      }
+
+      // Re-inicializar cuando Astro cargue una nueva página
+      document.addEventListener('astro:page-load', () => {
+        initTransitions();
+      });
+    </script>
   </head>
-  <body  >
+  <body>
     <!-- <Loader /> -->
-    <div class="app-content overflow-auto ">
+    <div class="app-content overflow-auto">
       <slot />
     </div>
   </body>
@@ -39,5 +89,34 @@ import Loader from "../components/Loader.astro";
   }
   .is-loading .app-content {
     display: none;
+  }
+
+  /* Estilos para la animación de salida */
+  html.navigating-away {
+    pointer-events: none; /* Evitar clics durante la transición */
+  }
+  
+  html.navigating-away .app-content {
+    animation: contentFadeOut 1.2s ease-in-out forwards;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Añadir una pequeña transición a los enlaces */
+  a {
+    transition: opacity 0.3s ease;
+  }
+  
+  html.navigating-away a {
+    opacity: 0.5;
+  }
+
+  @keyframes contentFadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.8;
+    }
   }
 </style>

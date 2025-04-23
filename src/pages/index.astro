@@ -33,9 +33,11 @@ import MatchSlider from "../components/MatchSlider.astro";
   }
   .side-image-container.show .lines-img {
     transform: translate(0, 0);
+    animation: showSideImageContainer 0.2s ease-in-out forwards;
   }
   .side-image-container.show .afa-team-img {
     transform: translate(0, 0);
+    animation: showSideImageContainer 0.4s ease-in-out forwards;
   }
 
   @keyframes fadeIn {
@@ -49,6 +51,7 @@ import MatchSlider from "../components/MatchSlider.astro";
   .main-text {
     opacity: 0;
     animation: fadeIn 0.5s ease-in-out forwards 0.3s;
+    view-transition-name: main-text;
   }
 
   @keyframes translateInShort {
@@ -62,6 +65,7 @@ import MatchSlider from "../components/MatchSlider.astro";
   .text-subtitle {
     transform: translateY(100px);
     animation: translateInShort 0.4s ease-in-out forwards 0.1s;
+    view-transition-name: text-subtitle;
   }
   @keyframes translateAnimation {
     from {
@@ -74,6 +78,7 @@ import MatchSlider from "../components/MatchSlider.astro";
   .text-title {
     transform: translateY(calc(50vh - 200px));
     animation: translateAnimation 0.4s ease-in-out forwards 0.1s;
+    view-transition-name: text-title;
   }
   @keyframes translateBrands {
     0% {
@@ -92,53 +97,219 @@ import MatchSlider from "../components/MatchSlider.astro";
   .text-brands {
     transform: translateY(calc(50vh - 200px));
     animation: translateAnimation 0.4s ease-in-out forwards 0.5s;
+    view-transition-name: text-brands;
   }
   .stars-img {
     opacity: 0;
     animation: fadeIn 0.4s ease-in-out forwards 0.5s;
+    view-transition-name: stars-img;
   }
   .footer {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards 0.5s;
+    view-transition-name: footer;
+  }
+
+  /* Estilos para las transiciones de vista */
+  ::view-transition-old(main-text),
+  ::view-transition-new(main-text) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(text-subtitle),
+  ::view-transition-new(text-subtitle) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(text-title),
+  ::view-transition-new(text-title) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(text-brands),
+  ::view-transition-new(text-brands) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(stars-img),
+  ::view-transition-new(stars-img) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(footer),
+  ::view-transition-new(footer) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  /* Animaciones para la salida */
+  @keyframes slideOutTeam {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(75%, -75%);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes translateOutShort {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100px);
+    }
+  }
+
+  @keyframes translateOutLong {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(50vh - 200px));
+    }
+  }
+
+  /* Estilos para los elementos que salen durante la transición */
+  html.navigating-away .main-text {
+    animation: fadeIn 0.8s ease-in-out reverse forwards;
+  }
+
+  html.navigating-away .text-subtitle {
+    animation: translateInShort 0.9s ease-in-out reverse forwards;
+  }
+
+  html.navigating-away .text-title {
+    animation: translateAnimation 1s ease-in-out reverse forwards;
+  }
+
+  html.navigating-away .text-brands {
+    animation: translateAnimation 1s ease-in-out reverse forwards;
+  }
+
+  html.navigating-away .stars-img {
+    animation: fadeIn 0.7s ease-in-out reverse forwards;
+  }
+
+  html.navigating-away .footer {
+    animation: fadeIn 1s ease-in-out reverse forwards;
+  }
+
+  /* Animaciones específicas para el contenedor de la imagen lateral */
+  html.navigating-away .side-image-container {
+    animation: fadeIn 0.8s ease-in-out reverse forwards;
+  }
+
+  /* Animaciones específicas para la salida */
+  @keyframes exit-lines {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(75%, -75%);
+    }
+  }
+
+  @keyframes exit-team {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(75%, -75%);
+    }
+  }
+
+  /* Restauramos las animaciones originales pero dentro del contexto de la navegación */
+  html.navigating-away .side-image-container .lines-img {
+    animation-name: exit-lines;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    z-index: 10;
+  }
+
+  html.navigating-away .side-image-container .afa-team-img {
+    animation-name: exit-team;
+    animation-duration: 0.9s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    z-index: 100 !important;
+  }
+
+  /* Añadir estilo para los enlaces con transición animada */
+  a.animated-transition {
+    transition: opacity 0.3s ease-in-out;
   }
 </style>
 
 <Layout>
-  <header class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-transparent" transition:animate="slide">
     <MainNavbar />
   </header>
-  <main class="w-full min-h-screen flex flex-col  ">
-    <div class="flex flex-1 flex-wrap max-lg:flex-col-reverse relative overflow-x-hidden side-image-container overflow-hidden ">
-      <div class="w-full lg:w-[60%]  lg:flex-1  flex max-lg:flex-col-reverse">
+  <script>
+    // Agregar una clase personalizada a los enlaces para controlar la transición
+    document.addEventListener('astro:page-load', () => {
+      document.querySelectorAll('a[href]:not([target])').forEach(link => {
+        link.classList.add('animated-transition');
+      });
+    });
+  </script>
+  <main class="w-full min-h-screen flex flex-col">
+    <div class="flex flex-1 flex-wrap max-lg:flex-col-reverse relative overflow-x-hidden side-image-container overflow-hidden" transition:animate="fade">
+      <div class="w-full lg:w-[60%] lg:flex-1 flex max-lg:flex-col-reverse">
         <SocialNetworkMenu />
         <div
-          class="main-text mt-18 flex flex-col gap-y-6 items-center justify-center flex-1 "
+          class="main-text mt-18 flex flex-col gap-y-6 items-center justify-center flex-1"
+          transition:name="main-text"
         >
           <img
             src={stars.src}
             alt="Logo Olimpiadas 2024"
             class="w-30 stars-img"
+            transition:name="stars-img"
           />
           <h2
             class="text-center text-primary-foreground text-lg tracking-[6px] font-extralight uppercase text-subtitle"
+            transition:name="text-subtitle"
           >
             Bienvenido al sitio del
           </h2>
           <h1
             class="text-center text-primary-foreground text-4xl md:text-7xl font-bold tracking-[20px] uppercase text-title"
+            transition:name="text-title"
           >
             Campeón <br />del Mundo
           </h1>
-          <div class="flex items-center gap-x-4 text-brands">
+          <div class="flex items-center gap-x-4 text-brands" transition:name="text-brands">
             <img src={brands.src} alt="afa - brands" class="w-60" />
           </div>
         </div>
       </div>
-      <div class=" w-full lg:flex-1  max-lg:h-[500px] relative  " transition:animate="slide">
-        <div class="absolute top-0 lines-img right-0  sm:bottom-0  ">
+      <div class="w-full lg:flex-1 max-lg:h-[500px] relative" transition:animate="slide">
+        <div class="absolute top-0 lines-img right-0 sm:bottom-0" transition:name="lines-img">
           <img src={lines.src} alt="lines" class="w-full h-full" />
         </div>
-        <div class="absolute top-0 afa-team-img right-0 bottom-0  md:bottom-8">
+        <div class="absolute top-0 afa-team-img right-0 bottom-0 md:bottom-8" transition:name="afa-team-img">
           <img src={afaTeam.src} alt="afa-team" class="w-auto h-full" />
         </div>
       </div>
@@ -146,13 +317,13 @@ import MatchSlider from "../components/MatchSlider.astro";
 
     <section
       class="py-6 px-0 lg:px-10 bg-primary-900 grid grid-cols-12 gap-y-10 w-full min-h-72 items-center footer overflow-auto lg:gap-x-10"
-       transition:name="matches"
-        
+      transition:name="matches"
+      transition:animate="slide"
     >
-      <div class="col-span-full lg:col-span-1 flex items-center justify-center">
+      <div class="col-span-full lg:col-span-1 flex items-center justify-center" transition:name="logo-olimpiadas">
         <img src={logoOlimpiadas.src} alt="Logo Olimpiadas 2024" class="w-full max-w-30" />
       </div>
-      <div class="col-span-full lg:col-span-11 px-2 md:px-5 ">
+      <div class="col-span-full lg:col-span-11 px-2 md:px-5" transition:name="match-slider">
         <MatchSlider />
       </div>
     </section>
