@@ -134,7 +134,7 @@ import MatchSlider from "../components/MatchSlider.astro";
           </div>
         </div>
       </div>
-      <div class=" w-full lg:flex-1  max-lg:h-[500px] relative  ">
+      <div class=" w-full lg:flex-1  max-lg:h-[500px] relative  " transition:animate="slide">
         <div class="absolute top-0 lines-img right-0  sm:bottom-0  ">
           <img src={lines.src} alt="lines" class="w-full h-full" />
         </div>
@@ -146,6 +146,8 @@ import MatchSlider from "../components/MatchSlider.astro";
 
     <section
       class="py-6 px-0 lg:px-10 bg-primary-900 grid grid-cols-12 gap-y-10 w-full min-h-72 items-center footer overflow-auto lg:gap-x-10"
+       transition:name="matches"
+        
     >
       <div class="col-span-full lg:col-span-1 flex items-center justify-center">
         <img src={logoOlimpiadas.src} alt="Logo Olimpiadas 2024" class="w-full max-w-30" />
@@ -157,19 +159,4 @@ import MatchSlider from "../components/MatchSlider.astro";
   </main>
 </Layout>
 
-<script>
-  const sideImageContainer = document.querySelector(".side-image-container");
-  const linesImg = document.querySelector(".lines-img");
-  const afaTeamImg = document.querySelector(".afa-team-img");
 
-  document.addEventListener("DOMContentLoaded", () => {
-    sideImageContainer?.classList.add("show");
-  });
-  // linesImg?.addEventListener("click", () => {
-  //   sideImageContainer?.classList.toggle("show");
-  // });
-
-  // afaTeamImg?.addEventListener("click", () => {
-  //   sideImageContainer?.classList.toggle("show");
-  // });
-</script>

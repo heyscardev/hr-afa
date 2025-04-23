@@ -15,7 +15,7 @@ console.log(data);
 >
   {data.Partidos.slice(0, 3).map((match) => <MatchCard {...match} />)}
 </div> -->
-<div class="swiper w-full bg-primary-850 rounded-sm">
+<div class="swiper w-full bg-primary-850 rounded-sm" transition:persist>
   <!-- Wrapper adicional requerido -->
   <div class="swiper-wrapper">
     <!-- Los slides -->
@@ -37,12 +37,12 @@ console.log(data);
   import Swiper from "swiper";
   import "swiper/css";
   // Módulo Navigation de Swiper y estilos
-  import { Navigation, Autoplay, } from "swiper/modules";
+  import { Navigation, Autoplay, EffectFade, } from "swiper/modules";
   import "swiper/css/navigation";
 
   // Configurar Swiper
   const swiper = new Swiper(".swiper", {
-    modules: [Navigation, Autoplay], // definir los módulos a usar
+    modules: [Navigation, Autoplay,EffectFade], // definir los módulos a usar
     loop: false, // definir si los slides estarán en bucle
     // agregar número de slides para la pantalla
  
@@ -51,6 +51,7 @@ console.log(data);
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
     },
+    
     spaceBetween: 10,
     breakpoints: {
       320: {
@@ -75,6 +76,44 @@ console.log(data);
       nextEl: ".swiper-button-next",
     },
   });
+document.addEventListener('astro:page-load', () => {
+  // Configurar Swiper
+  const swiper = new Swiper(".swiper", {
+    modules: [Navigation, Autoplay,EffectFade], // definir los módulos a usar
+    loop: false, // definir si los slides estarán en bucle
+    // agregar número de slides para la pantalla
+ 
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    
+    spaceBetween: 10,
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      
+      },
+      1280: {
+        slidesPerView: 4,
+      
+      },
+    },
+
+    navigation: {
+      // definir botones next y prev para el módulo Navigation
+      prevEl: ".swiper-button-prev",
+      nextEl: ".swiper-button-next",
+    },
+  });
+});
 </script>
 <style>
   .swiper-slide {

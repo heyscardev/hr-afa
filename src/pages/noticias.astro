@@ -1,12 +1,41 @@
 ---
 import LayoutOthers from "../layouts/LayoutOthers.astro";
 
+import MainNavbar from "../components/MainNavbar.astro";
+import Layout from "../layouts/Layout.astro";
+import afaTeam from "../assets/afa-team.webp";
+import logoOlimpiadas from "../assets/logo-olimpiadas.svg";
+import lines from "../assets/dashboard-lines.svg";
+import stars from "../assets/stars.webp";
+import brands from "../assets/brands.webp";
+import SocialNetworkMenu from "../components/SocialNetworkMenu.astro";
+import MatchCard from "../components/MatchCard.astro";
+import MatchSlider from "../components/MatchSlider.astro";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <LayoutOthers>
-  Noticias
+  <main class="w-full min-h-screen flex flex-col">
+   
+
+    <section
+    transition:name="matches"
+ 
+      class="py-6 px-0 lg:px-10 bg-primary-900 grid grid-cols-12 gap-y-10 w-full min-h-72 items-center   lg:gap-x-10"
+    >
+      <div class="col-span-full lg:col-span-1 flex items-center justify-center">
+        <img
+          src={logoOlimpiadas.src}
+          alt="Logo Olimpiadas 2024"
+          class="w-full max-w-30"
+        />
+      </div>
+      <div class="col-span-full lg:col-span-11 px-2 md:px-5">
+        <MatchSlider />
+      </div>
+    </section>
+  </main>
   <!-- <Loader /> -->
   <!-- <Welcome /> -->
 </LayoutOthers>
